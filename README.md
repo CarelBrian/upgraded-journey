@@ -721,7 +721,8 @@ There you have your own little e-commerce aggregator.
 
 
 #### **4. Example project: Scraping Techcrunch: Creating Your Own RSS Feed Reader**
-![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/Screen-Shot-2017-07-24-at-12.png)
+![image scrapy7](https://github.com/CarelBrian/upgraded-journey/blob/master/Image%20scrapy7.png)
+
 
 One of Scrapy’s features is its ability to handle XML data with ease, and in this part, you are going to extract data from Techcrunch’s RSS feed.
 
@@ -730,7 +731,8 @@ Create a basic spider:
 Scrapy genspider techcrunch techcrunch.com/feed/
 ```
 Let’s have a look at the XML; the marked portion is data of interest:
-![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/242.png)
+![image scrapy8](https://github.com/CarelBrian/upgraded-journey/blob/master/Image%20scrapy8.png)
+
 Here are some observations from the page:
 
 - Each article is present between `<item>``</item>` tags, and there are 20 such items(articles).
@@ -773,7 +775,8 @@ Date of publishing – //item/pubDate/text()
 **Extracting author name: dealing with namespaces in XML**
 
 Notice the `<creator>` tags:
-![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/252.png)
+![image scrapy9](https://github.com/CarelBrian/upgraded-journey/blob/master/Image%20scrapy9.png)
+    
 The tag itself has some text “dc:” because of which it can’t be extracted using XPath, and the author name itself is crowded with “![CDATA..” irrelevant text. These are just XML namespaces, and you don’t want to have anything to do with them, so we’ll ask scrapy to remove the namespace:
 ```
 response.selector.remove_namespaces()
@@ -828,7 +831,8 @@ Let’s run the spider:
 scrapy crawl techcrunch
 ```
 
-![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/261.png)
+![image scrapy10](https://github.com/CarelBrian/upgraded-journey/blob/master/Image%20scrapy10.png)
+    
 And there you have your own RSS reader!
 
 
