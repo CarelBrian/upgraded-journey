@@ -628,7 +628,9 @@ Let’s first generate a basic spider:
 scrapy genspider shopclues www.shopclues.com/mobiles-featured-store-4g-smartphone.html
 ```
 This is what the ShopClues web page looks like:
-![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/182.png)
+![ShopClues web page](https://av-eks-blogoptimized.s3.amazonaws.com/182.png)
+
+
 
 
 #### **4. To know more about Scrapy**
