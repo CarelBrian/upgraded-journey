@@ -694,7 +694,7 @@ For more information, we bring in the table below informations about extending S
 | [Core API](https://docs.scrapy.org/en/latest/topics/api.html) | Use it on extensions and middlewares to extend Scrapy functionality.     |
 
 
-##### **Conclusion**
+#### **Conclusion**
 We have just scratched the surface of Scrapy’s potential as a web scraping tool. It is highly recommended to improve your skills by browsing the links below to go further and contribute to the development of Scrapy.
 
 | All the rest                                                                                 | Description                                       |
@@ -704,7 +704,7 @@ We have just scratched the surface of Scrapy’s potential as a web scraping too
 | [Versioning and API stability](https://docs.scrapy.org/en/latest/versioning.html) | Understand Scrapy versioning and API stability. |
 
 
-##### **Ressources**
+#### **Ressources**
 
 [Scrapy official site](https://scrapy.org/)
 
