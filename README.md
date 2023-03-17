@@ -632,7 +632,8 @@ Let’s first generate a basic spider:
 scrapy genspider shopclues www.shopclues.com/mobiles-featured-store-4g-smartphone.html
 ```
 This is what the ShopClues web page looks like:
-![ShopClues web page](https://av-eks-blogoptimized.s3.amazonaws.com/182.png)
+
+![image scrapy1](https://github.com/CarelBrian/upgraded-journey/blob/master/Image%20scrapy1.png)
 
 
 
