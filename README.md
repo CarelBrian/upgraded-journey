@@ -25,16 +25,19 @@ It can come down to personal perference and your existing tech stack but Scrapy 
 However, there are some situations where it really shines and others where using another web scraping stack is just as good or even better.
 
 ####### **a Large Scale Web Scraping**
+
 Where Scrapy really shines is if you want to build scalable web scrapers that power your production data feeds. This is the use case Scrapy was built for and is the king at.
 
 Out of the box, with Scrapy you have a highly scalable web scraping stack that is trusted by thousands of developers every day in production applications.
 
 ####### **b Want To Learn A Powerful Web Scraping Framework**
+
 If you wanted to learn a web scraping technology to expand your skillset and enhance your CV then Scrapy is the best option. Companies all over the world use Scrapy in their production applications so if you can call yourself an experienced Scrapy developer you will never be short of work.
 
 Learning Scrapy is also a great side skill for any data scientist, as you can quickly develop scrapers to power your data pipelines without the need of building your own web scraping stack from scratch.
 
 ####### **c New To Web Scraping & Have Small Project**
+
 Generally speaking, the learning curve associated with Python Scrapy is a bit steeper than other approaches. So if you are new to web scraping and just have a small once off project like scraping a couple pages, then using the Python Requests/BeautifulSoup stack is a good option.
 
 It is quick and easy to get setup, and you don't need to worry about learning about Scrapy Items, Pipelines, Feed Exporters, etc.
@@ -44,6 +47,7 @@ Just create the simplest possible scraper to get the job done.
 However, if you want to get into web scraping, need to build a production system or want to learn a powerful web scraping framework then learning Scrapy is well worth the extra hour or two to learn it.
 
 ####### **d Scraping Javascript Heavy Websites**
+
 Although, Scrapy can't render Javascript out of the box, it can be easily configured to do so by using one of the many headless browser extensions for Scrapy.
 
 However, if you would like to focus solely on making a bot that heavily interacts with a page, logging in and navigating around then it might be better for you if you used the Puppeteer or Playwright in their native language of Javascript.
