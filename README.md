@@ -632,8 +632,202 @@ This is what the ShopClues web page looks like:
 
 
 
+The following information needs to be extracted from the page:
 
-#### **4. To know more about Scrapy**
+- Product Name
+- Product price
+- Product discount
+- Product image
+
+**Extracting image URLs of the product**
+On careful inspection, it can be seen that the attribute “data-img” of the <img> tag can be used to extract image URLs:
+```
+response.css("img::attr(data-img)").extract()
+```
+![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/192.png)
+
+**Extracting product name from <img> tags**
+Notice that the “title” attribute of the <img> tag contains the product’s full name:
+![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/202.png)
+```
+response.css("img::attr(title)").extract()
+```
+Similarly, selectors for price(“.p_price”) and discount(“.prd_discount”).
+
+**How to download product images?**
+Scrapy provides reusable image pipelines for downloading files attached to a particular item (for example, when you scrape products and also want to download their images locally).
+
+In order to use the images pipeline to download images, it needs to be enabled in the settings.py file. Add the following lines to the file:
+```
+ITEM_PIPELINES = {
+  'scrapy.pipelines.images.ImagesPipeline': 1
+}
+IMAGES_STORE = 'tmp/images/'
+```
+
+you are basically telling scrapy to use the ‘Images Pipeline,’ and the location for the images should be in the folder ‘tmp/images/.’ The final spider would now be:
+```
+import scrapy
+
+class ShopcluesSpider(scrapy.Spider):
+   #name of spider
+   name = 'shopclues'
+
+   #list of allowed domains
+   allowed_domains = ['www.shopclues.com/mobiles-featured-store-4g-smartphone.html']
+   #starting url
+   start_urls = ['http://www.shopclues.com/mobiles-featured-store-4g-smartphone.html/']
+   #location of csv file
+   custom_settings = {
+       'FEED_URI' : 'tmp/shopclues.csv'
+   }
+
+   def parse(self, response):
+       #Extract product information
+       titles = response.css('img::attr(title)').extract()
+       images = response.css('img::attr(data-img)').extract()
+       prices = response.css('.p_price::text').extract()
+       discounts = response.css('.prd_discount::text').extract()
+
+       for item in zip(titles,prices,images,discounts):
+           scraped_info = {
+               'title' : item[0],
+               'price' : item[1],
+               'image_urls' : [item[2])], #Set's the url for scrapy to download images
+               'discount' : item[3]
+           }
+
+           yield scraped_info
+```
+Here are a few things to note:
+
+custom_settings: This is used to set the settings of an individual spider. Remember that settings.py is for the whole project, so here you tell scrapy that the output of this spider should be stored in a CSV  file “shopclues.csv” that is to be stored in the “tmp” folder.
+scraped_info[“image_urls”]: This is the field that scrapy checks for the image’s link. If you set this field with a list of URLs, scrapy will automatically download and store those images for you.
+On running the spider, the output can be read from “tmp/shopclues.csv”:
+![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/211.png)
+
+You also get the images downloaded. Check the folder “tmp/images/full,” and you will see the images:
+![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/222.png)
+
+Also, notice that scrapy automatically adds the download path of the image on your system in the csv:
+![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/232.png)
+There you have your own little e-commerce aggregator.
+
+
+#### **4. Scraping Techcrunch: Creating Your Own RSS Feed Reader**
+![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/Screen-Shot-2017-07-24-at-12.png)
+
+One of Scrapy’s features is its ability to handle XML data with ease, and in this part, you are going to extract data from Techcrunch’s RSS feed.
+
+Create a basic spider:
+```
+Scrapy genspider techcrunch techcrunch.com/feed/
+```
+Let’s have a look at the XML; the marked portion is data of interest:
+![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/242.png)
+Here are some observations from the page:
+
+- Each article is present between `<item>``</item>` tags, and there are 20 such items(articles).
+- The title of the post is in `<title></title`> tags.
+- The link to the article can be found in `<link>` tags.
+<pubDate> contains the date of publishing.
+- The author’s name is enclosed between funny-looking <dc:creator> tags.
+
+**Overview of XPath and XML**
+XPath is a syntax that is used to define XML documents. It can be used to traverse through an XML document. Note that XPath follows a hierarchy.
+
+**Extracting the title of the post**
+
+Let’s extract the title of the first post. Similar to `response.css(..)`, the function `response.xpath(..)` in scrapy deals with XPath. The following code should do it:
+```
+response.xpath("//item/title").extract_first()
+```
+Output:
+```
+u'<title xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:wfw="http://wellformedweb.org/CommentAPI/" xmlns:dc
+="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+xmlns:slash="http://purl.org/rss/1.0/modules/slash/" xmlns:georss="http://www.georss.org/georss" xmlns:geo="http://www.w3.org/2003/
+01/geo/wgs84_pos#" xmlns:media="http://search.yahoo.com/mrss/">Why the future of deep learning depends on finding good data</title>'
+```
+Wow! That’s a lot of content, but only the text content of the title is of interest. Let’s filter it out:
+```
+response.xpath("//item/title/text()").extract_first()
+```
+Output:
+```
+u'Why the future of deep learning depends on finding good data'
+```
+This is much better. Notice that text() here is equivalent of ::text from CSS selectors. Also, look at the XPath //item/title/text(); here, you are basically saying to find the element “item” and extract the “text” content of its sub-element “title”.
+
+Similarly, the Xpaths for the link, pubDate as:
+
+Link – //item/link/text()
+Date of publishing – //item/pubDate/text()
+
+**Extracting author name: dealing with namespaces in XML**
+
+Notice the `<creator>` tags:
+![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/252.png)
+The tag itself has some text “dc:” because of which it can’t be extracted using XPath, and the author name itself is crowded with “![CDATA..” irrelevant text. These are just XML namespaces, and you don’t want to have anything to do with them, so we’ll ask scrapy to remove the namespace:
+```
+response.selector.remove_namespaces()
+```
+Now when you try extracting the author name, it will work:
+```
+response.xpath("//item/creator/text()").extract_first()
+```
+Output: u’Ophir Tanz,Cambron Carter’
+
+The complete spider for TechCrunch would be:
+```
+import scrapy
+
+class TechcrunchSpider(scrapy.Spider):
+    #name of the spider
+    name = 'techcrunch'
+
+    #list of allowed domains
+    allowed_domains = ['techcrunch.com/feed/']
+
+    #starting url for scraping
+    start_urls = ['http://techcrunch.com/feed/']
+
+    #setting the location of the output csv file
+    custom_settings = {
+        'FEED_URI' : 'tmp/techcrunch.csv'
+    }
+
+    def parse(self, response):
+        #Remove XML namespaces
+        response.selector.remove_namespaces()
+
+        #Extract article information
+        titles = response.xpath('//item/title/text()').extract()
+        authors = response.xpath('//item/creator/text()').extract()
+        dates = response.xpath('//item/pubDate/text()').extract()
+        links = response.xpath('//item/link/text()').extract()
+
+        for item in zip(titles,authors,dates,links):
+            scraped_info = {
+                'title' : item[0],
+                'author' : item[1],
+                'publish_date' : item[2],
+                'link' : item[3]
+            }
+
+            yield scraped_info
+```
+Let’s run the spider:
+```
+scrapy crawl techcrunch
+```
+
+![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/261.png)
+And there you have your own RSS reader!
+
+
+
+#### **5. To know more about Scrapy**
 This section shows the links to have more informations about the basic concepts, built-in services, solving specific problems and extending Scrapy.
 
 ###### **Basic concepts**
@@ -722,7 +916,7 @@ We have just scratched the surface of Scrapy’s potential as a web scraping too
 
 [ScrapyOps](https://scrapeops.io/python-scrapy-playbook/scrapy-web-scraping-intro/)
 
-[Scrapy for Automated Web Crawling & Data Extraction in Python (Updated 2023)](https://www.analyticsvidhya.com/blog/2017/07/web-scraping-in-python-using-scrapy/)
+[Web Scraping in Python using Scrapy (with multiple examples)](https://www.analyticsvidhya.com/blog/2017/07/web-scraping-in-python-using-scrapy/)
 
 
 
