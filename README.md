@@ -7,10 +7,11 @@
 
 
 
-##### **Scrapy:**
+
+##### **Présentation du concept**
 Scrapy (/ˈskreɪpaɪ/) is an application framework for crawling web sites and extracting structured data which can be used for a wide range of useful applications, like data mining, information processing or historical archival. Even though Scrapy was originally designed for [web scraping](https://en.wikipedia.org/wiki/Web_scraping), it can also be used to extract data using APIs (such as [Amazon Associates Web Services](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html)) or as a general purpose web crawler.
 
-#### **Why:**
+#### **Why Scrapy:**
 
 Scrapy provides a lot of powerful features for making scraping easy and efficient, such as:
 - Built-in support for [selecting and extracting](https://docs.scrapy.org/en/latest/topics/selectors.html#topics-selectors) data from HTML/XML sources using extended CSS selectors and XPath expressions, with helper methods to extract using regular expressions.
