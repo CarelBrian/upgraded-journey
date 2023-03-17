@@ -704,10 +704,12 @@ We have just scratched the surface of Scrapy’s potential as a web scraping too
 | [Versioning and API stability](https://docs.scrapy.org/en/latest/versioning.html) | Understand Scrapy versioning and API stability. |
 
 
-##### **Ressources consultées
+##### **Ressources**
 
 [Scrapy official site](https://scrapy.org/)
+
 [ScrapyOps](https://scrapeops.io/python-scrapy-playbook/scrapy-web-scraping-intro/)
+
 [Scrapy for Automated Web Crawling & Data Extraction in Python (Updated 2023)](https://www.analyticsvidhya.com/blog/2017/07/web-scraping-in-python-using-scrapy/)
 
 
