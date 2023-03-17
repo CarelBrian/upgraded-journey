@@ -1,13 +1,13 @@
 
 ![Logo](https://github.com/LeMeteore/upgraded-journey/blob/master/img/Logo.png)
 
-##### **Introduction**
+#### **Introduction**
 Whether you are a developer, data scientist or marketer, being able to develop web scrapers is a hugely valuable skill to have. When it comes to web scraping, Python Scrapy is the godfather of web scraping frameworks. Scrapy has a huge amount of functionality but it is a very structured web scraping framework and has a Scrapy way of doing things. So to get the most out of Scrapy, you need to understand the main building blocks within Scrapy and how they work together.
 
 
 
 
-##### **Presentation of Scrapy**
+#### **Presentation of Scrapy**
 Scrapy (/ˈskreɪpaɪ/) is an application framework for crawling web sites and extracting structured data which can be used for a wide range of useful applications, like data mining, information processing or historical archival. Even though Scrapy was originally designed for [web scraping](https://en.wikipedia.org/wiki/Web_scraping), it can also be used to extract data using APIs (such as [Amazon Associates Web Services](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html)) or as a general purpose web crawler.
 
 ###### **Why Scrapy:**
@@ -55,7 +55,7 @@ However, if you would like to focus solely on making a bot that heavily interact
 There are different ways to install Scrapy. The simple option when using [Anaconda](https://docs.anaconda.com/anaconda/) or [Miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) is: to install the package from the [conda-forge](https://conda-forge.org/) channel, which has up-to-date packages for Linux, Windows and macOS. We can also install Scrapy by using pip. 
 
 
-##### **1. An overview of Scrapy**
+#### **1. An overview of Scrapy**
 In this section, we are going to scrape quotes.toscrape.com, a website that lists quotes from famous authors. We'll walk through five tasks.
 - Creating a new Scrapy project
 
@@ -588,7 +588,7 @@ You can continue from the sections below: Basic concepts to know more about the 
 
 Before that, we have another example project for you below.
 
-##### **2. Example project: QuoteBot**
+#### **2. Example project: QuoteBot**
 This is a Scrapy project to scrape quotes from famous people from http://quotes.toscrape.com ([github repo](https://github.com/scrapinghub/spidyquotes)).
 
 ###### **Extracted data**
@@ -621,7 +621,7 @@ $ scrapy crawl toscrape-css -o quotes.json
 ```
 
 
-##### **3. To know more about Scrapy**
+#### **3. To know more about Scrapy**
 This section shows the links to have more informations about the basic concepts, built-in services, solving specific problems and extending Scrapy.
 
 ###### **Basic concepts**
