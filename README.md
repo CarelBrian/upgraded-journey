@@ -1,5 +1,5 @@
 
-![Logo](https://github.com/LeMeteore/upgraded-journey/blob/master/img/Logo.png)
+![Logo_DIT](https://github.com/LeMeteore/upgraded-journey/blob/master/img/Logo.png)
 
 #### **Introduction**
 Whether you are a developer, data scientist or marketer, being able to develop web scrapers is a hugely valuable skill to have. When it comes to web scraping, Python Scrapy is the godfather of web scraping frameworks. Scrapy has a huge amount of functionality but it is a very structured web scraping framework and has a Scrapy way of doing things. So to get the most out of Scrapy, you need to understand the main building blocks within Scrapy and how they work together.
@@ -649,11 +649,11 @@ On careful inspection, it can be seen that the attribute “data-img” of the <
 ```
 response.css("img::attr(data-img)").extract()
 ```
-![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/192.png)
+![image scrapy2](https://github.com/CarelBrian/upgraded-journey/blob/master/Image%20scrapy2.png)
 
 **Extracting product name from <img> tags**
 Notice that the “title” attribute of the <img> tag contains the product’s full name:
-![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/202.png)
+![image scrapy3](https://github.com/CarelBrian/upgraded-journey/blob/master/Image%20scrapy3.png)
 ```
 response.css("img::attr(title)").extract()
 ```
@@ -709,13 +709,14 @@ Here are a few things to note:
 custom_settings: This is used to set the settings of an individual spider. Remember that settings.py is for the whole project, so here you tell scrapy that the output of this spider should be stored in a CSV  file “shopclues.csv” that is to be stored in the “tmp” folder.
 scraped_info[“image_urls”]: This is the field that scrapy checks for the image’s link. If you set this field with a list of URLs, scrapy will automatically download and store those images for you.
 On running the spider, the output can be read from “tmp/shopclues.csv”:
-![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/211.png)
+![image scrapy4](https://github.com/CarelBrian/upgraded-journey/blob/master/Image%20scrapy4.png)
 
 You also get the images downloaded. Check the folder “tmp/images/full,” and you will see the images:
-![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/222.png)
+![image scrapy5](https://github.com/CarelBrian/upgraded-journey/blob/master/Image%20scrapy5.png)
 
 Also, notice that scrapy automatically adds the download path of the image on your system in the csv:
-![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/232.png)
+![image scrapy6](https://github.com/CarelBrian/upgraded-journey/blob/master/Image%20scrapy6.png)
+
 There you have your own little e-commerce aggregator.
 
 
