@@ -620,8 +620,18 @@ If you want to save the scraped data to a file, you can pass the `-o` option:
 $ scrapy crawl toscrape-css -o quotes.json
 ```
 
+#### **3. Example project: Scraping an E-Commerce Site**
+As a test site, you will scrape ShopClues for 4G-Smartphones
 
-#### **3. To know more about Scrapy**
+Let’s first generate a basic spider:
+```
+scrapy genspider shopclues www.shopclues.com/mobiles-featured-store-4g-smartphone.html
+```
+This is what the ShopClues web page looks like:
+![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/182.png)
+
+
+#### **4. To know more about Scrapy**
 This section shows the links to have more informations about the basic concepts, built-in services, solving specific problems and extending Scrapy.
 
 ###### **Basic concepts**
