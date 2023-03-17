@@ -714,7 +714,7 @@ Also, notice that scrapy automatically adds the download path of the image on yo
 There you have your own little e-commerce aggregator.
 
 
-#### **4. Scraping Techcrunch: Creating Your Own RSS Feed Reader**
+#### **4. Example project: Scraping Techcrunch: Creating Your Own RSS Feed Reader**
 ![alt text](https://av-eks-blogoptimized.s3.amazonaws.com/Screen-Shot-2017-07-24-at-12.png)
 
 One of Scrapy’s features is its ability to handle XML data with ease, and in this part, you are going to extract data from Techcrunch’s RSS feed.
