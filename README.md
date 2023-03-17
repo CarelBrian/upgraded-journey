@@ -1,17 +1,16 @@
 
 ![Logo](https://github.com/LeMeteore/upgraded-journey/blob/master/img/Logo.png)
 
-### Content
+##### **Introduction**
+Whether you are a developer, data scientist or marketer, being able to develop web scrapers is a hugely valuable skill to have. When it comes to web scraping, Python Scrapy is the godfather of web scraping frameworks. Scrapy has a huge amount of functionality but it is a very structured web scraping framework and has a Scrapy way of doing things. So to get the most out of Scrapy, you need to understand the main building blocks within Scrapy and how they work together.
 
 
 
 
-
-
-##### **Présentation du concept**
+##### **Presentation of Scrapy**
 Scrapy (/ˈskreɪpaɪ/) is an application framework for crawling web sites and extracting structured data which can be used for a wide range of useful applications, like data mining, information processing or historical archival. Even though Scrapy was originally designed for [web scraping](https://en.wikipedia.org/wiki/Web_scraping), it can also be used to extract data using APIs (such as [Amazon Associates Web Services](https://affiliate-program.amazon.com/gp/advertising/api/detail/main.html)) or as a general purpose web crawler.
 
-#### **Why Scrapy:**
+###### **Why Scrapy:**
 
 Scrapy provides a lot of powerful features for making scraping easy and efficient, such as:
 - Built-in support for [selecting and extracting](https://docs.scrapy.org/en/latest/topics/selectors.html#topics-selectors) data from HTML/XML sources using extended CSS selectors and XPath expressions, with helper methods to extract using regular expressions.
@@ -20,16 +19,47 @@ Scrapy provides a lot of powerful features for making scraping easy and efficien
 - Robust encoding support and auto-detection, for dealing with foreign, non-standard and broken encoding declarations.
 - [Strong extensibility support](https://docs.scrapy.org/en/latest/index.html#extending-scrapy), allowing you to plug in your own functionality using [signals](https://docs.scrapy.org/en/latest/topics/signals.html#topics-signals) and a well-defined API (middlewares, [extensions](https://docs.scrapy.org/en/latest/topics/extensions.html#topics-extensions), and [pipelines](https://docs.scrapy.org/en/latest/topics/item-pipeline.html#topics-item-pipeline)).
 
+###### **When Should You Use Scrapy?**
+It can come down to personal perference and your existing tech stack but Scrapy can be used for virtually every web scraping use case.
 
-#### **Installation**
+However, there are some situations where it really shines and others where using another web scraping stack is just as good or even better.
+
+####### **a Large Scale Web Scraping**
+Where Scrapy really shines is if you want to build scalable web scrapers that power your production data feeds. This is the use case Scrapy was built for and is the king at.
+
+Out of the box, with Scrapy you have a highly scalable web scraping stack that is trusted by thousands of developers every day in production applications.
+
+####### **b Want To Learn A Powerful Web Scraping Framework**
+If you wanted to learn a web scraping technology to expand your skillset and enhance your CV then Scrapy is the best option. Companies all over the world use Scrapy in their production applications so if you can call yourself an experienced Scrapy developer you will never be short of work.
+
+Learning Scrapy is also a great side skill for any data scientist, as you can quickly develop scrapers to power your data pipelines without the need of building your own web scraping stack from scratch.
+
+####### **c New To Web Scraping & Have Small Project**
+Generally speaking, the learning curve associated with Python Scrapy is a bit steeper than other approaches. So if you are new to web scraping and just have a small once off project like scraping a couple pages, then using the Python Requests/BeautifulSoup stack is a good option.
+
+It is quick and easy to get setup, and you don't need to worry about learning about Scrapy Items, Pipelines, Feed Exporters, etc.
+
+Just create the simplest possible scraper to get the job done.
+
+However, if you want to get into web scraping, need to build a production system or want to learn a powerful web scraping framework then learning Scrapy is well worth the extra hour or two to learn it.
+
+####### **d Scraping Javascript Heavy Websites**
+Although, Scrapy can't render Javascript out of the box, it can be easily configured to do so by using one of the many headless browser extensions for Scrapy.
+
+However, if you would like to focus solely on making a bot that heavily interacts with a page, logging in and navigating around then it might be better for you if you used the Puppeteer or Playwright in their native language of Javascript.
+
+
+
+
+###### **Installation**
 There are different ways to install Scrapy. The simple option when using [Anaconda](https://docs.anaconda.com/anaconda/) or [Miniconda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) is: to install the package from the [conda-forge](https://conda-forge.org/) channel, which has up-to-date packages for Linux, Windows and macOS. We can also install Scrapy by using pip. 
 
 
-#### **1. Quick start with Scrapy**
+##### **1. An overview of Scrapy**
 In this section, we are going to scrape quotes.toscrape.com, a website that lists quotes from famous authors. We'll walk through five tasks.
 - Creating a new Scrapy project
 
-- Writing a [spider](https://docs.scrapy.org/en/latest/topics/spiders.html#topics-spiders) to crawl a site and extract data
+- Writing a spider to crawl a site and extract data
 
 - Exporting the scraped data using the command line
 
@@ -37,7 +67,7 @@ In this section, we are going to scrape quotes.toscrape.com, a website that list
 
 - Using spider arguments
 
-##### **Creating a project**
+###### **Creating a project**
 First step, we have to set up a new Scrapy project. We'll have to enter a directory where you’d like to store your code and run:
 
 ```
@@ -65,7 +95,7 @@ tutorial/
             __init__.py
 ```
 
-##### **Writing a spider to crawl a site and extract data**
+###### **Writing a spider to crawl a site and extract data**
 Spiders are classes that you define and that Scrapy uses to scrape information from a website (or a group of websites). They must subclass Spider and define the initial requests to make, optionally how to follow links in the pages, and how to parse the downloaded page content to extract data.
 
 This is the code for our first Spider. Save it in a file named `quotes_spider.py` under the `tutorial/spiders` directory in your project:
@@ -103,7 +133,7 @@ Our Spider subclasses `scrapy.Spider` and defines some attributes and methods:
 The `parse()` method usually parses the response, extracting the scraped data as dicts and also finding new URLs to follow and creating new requests (`Request`) from them.
 
 
-##### **How to run our spider**
+###### **How to run our spider**
 You have to go to the project’s top level directory and run:
 
 ```
@@ -126,7 +156,7 @@ You will get an output similar to this:
 ```
 Now, check the files in the current directory. You should notice that two new files have been created: quotes-1.html and quotes-2.html, with the content for the respective URLs, as our `parse` method instructs.
 
-##### **A shortcut to the start_requests method**
+###### **A shortcut to the start_requests method**
 Instead of implementing a `start_requests()` method that generates `scrapy.Request` objects from URLs, you can just define a `start_urls` class attribute with a list of URLs. This list will then be used by the default implementation of `start_requests()` to create the initial requests for your spider:
 
 ```
@@ -150,7 +180,7 @@ class QuotesSpider(scrapy.Spider):
 
 The `parse()` method will be called to handle each of the requests for those URLs, even though we haven’t explicitly told Scrapy to do so. This happens because `parse()` is Scrapy’s default callback method, which is called for requests without an explicitly assigned callback.
 
-##### **Extracting data**
+###### **Extracting data**
 The best way to learn how to extract data with Scrapy is trying selectors using the [Scrapy shell](https://docs.scrapy.org/en/latest/topics/shell.html#topics-shell). 
 
 Run:
@@ -244,7 +274,7 @@ In order to find the proper CSS selectors to use, you might find useful opening 
 [Selector Gadget](https://selectorgadget.com/) is also a nice tool to quickly find CSS selector for visually selected elements, which works in many browsers.
 
 
-##### **XPath: a brief intro**
+###### **XPath: a brief intro**
 Besides [CSS](https://www.w3.org/TR/selectors), Scrapy selectors also support using [XPath](https://www.w3.org/TR/xpath/all/) expressions:
 
 ```
@@ -257,7 +287,7 @@ XPath expressions are very powerful, and are the foundation of Scrapy Selectors.
 
 We won’t cover much of XPath here, but you can read more about [using XPath with Scrapy Selectors here](https://docs.scrapy.org/en/latest/topics/selectors.html#topics-selectors). To learn more about XPath, we recommend [this tutorial to learn XPath through examples](http://zvon.org/comp/r/tut-XPath_1.html), and [this tutorial to learn “how to think in XPath”](http://zvon.org/comp/r/tut-XPath_1.html).
 
-##### **Extracting quotes and authors**
+###### **Extracting quotes and authors**
 Now that you know a bit about selection and extraction, let’s complete our spider by writing the code to extract the quotes from the web page.
 
 Each quote in [https://quotes.toscrape.com](https://quotes.toscrape.com/) is represented by HTML elements that look like this:
@@ -323,7 +353,7 @@ Having figured out how to extract each bit, we can now iterate over all the quot
 ...
 ```
 
-##### **Extracting data in our spider**
+###### **Extracting data in our spider**
 Let’s get back to our spider. Until now, it doesn’t extract any data in particular, just saves the whole HTML page to a local file. Let’s integrate the extraction logic above into our spider.
 
 A Scrapy spider typically generates many dictionaries containing the data extracted from the page. To do that, we use the `yield` Python keyword in the callback, as you can see below:
@@ -355,7 +385,7 @@ If you run this spider, it will output the extracted data with the log:
 {'tags': ['edison', 'failure', 'inspirational', 'paraphrased'], 'author': 'Thomas A. Edison', 'text': "“I have not failed. I've just found 10,000 ways that won't work.”"}
 ```
 
-#### **Storing the scraped data**
+##### **Storing the scraped data**
 The simplest way to store the scraped data is by using [Feed exports](https://docs.scrapy.org/en/latest/topics/feed-exports.html#topics-feed-exports), with the following command:
 ```
 scrapy crawl quotes -O quotes.json
@@ -370,7 +400,7 @@ The JSON Lines format is useful because it’s stream-like, you can easily appen
 
 In small projects (like the one in this tutorial), that should be enough. However, if you want to perform more complex things with the scraped items, you can write an Item Pipeline. A placeholder file for [Item Pipelines](https://docs.scrapy.org/en/latest/topics/item-pipeline.html#topics-item-pipeline) has been set up for you when the project is created, in `tutorial/pipelines.py`. Though you don’t need to implement any item pipelines if you just want to store the scraped items.
 
-#### **Following links**
+##### **Following links**
 Let’s say, instead of just scraping the stuff from the first two pages from https://quotes.toscrape.com, you want quotes from all the pages in the website.
 
 Now that you know how to extract data from pages, let’s see how to follow links from them.
@@ -428,7 +458,7 @@ Now, after extracting the data, the `parse()` method looks for the link to the n
 
 In our example, it creates a sort of loop, following all the links to the next page until it doesn’t find one – handy for crawling blogs, forums and other sites with pagination.
 
-##### **A shortcut for creating Requests**
+###### **A shortcut for creating Requests**
 As a shortcut for creating Request objects you can use `response.follow`:
 ```
 import scrapy
@@ -478,7 +508,7 @@ or, shortening it further:
 yield from response.follow_all(css='ul.pager a', callback=self.parse)
 ```
 
-##### **More examples and patterns**
+###### **More examples and patterns**
 Here is another spider that illustrates callbacks and following links, this time for scraping author information:
 ```
 import scrapy
@@ -513,7 +543,7 @@ Here we’re passing callbacks to `response.follow_all` as positional arguments 
 The `parse_author` callback defines a helper function to extract and cleanup the data from a CSS query and yields the Python dict with the author data.
 
 
-#### **Using spider arguments**
+##### **Using spider arguments**
 You can provide command line arguments to your spiders by using the `-a` option when running them:
 ```
 scrapy crawl quotes -O quotes-humor.json -a tag=humor
@@ -551,14 +581,14 @@ If you pass the `tag=humor` argument to this spider, you’ll notice that it wil
 You can [learn more about handling spider arguments here](https://docs.scrapy.org/en/latest/topics/spiders.html#spiderargs).
 
 
-#### **Next steps¶**
-This tutorial covered only the basics of Scrapy, but there’s a lot of other features not mentioned here. Check the [What else?](https://docs.scrapy.org/en/latest/intro/overview.html#topics-whatelse) section in [Scrapy at a glance](https://docs.scrapy.org/en/latest/intro/overview.html#intro-overview) chapter for a quick overview of the most important ones.
+##### **Next steps**
+This section covered only the basics of Scrapy, but there’s a lot of other features not mentioned here. Check the [What else?](https://docs.scrapy.org/en/latest/intro/overview.html#topics-whatelse) section in [Scrapy at a glance](https://docs.scrapy.org/en/latest/intro/overview.html#intro-overview) chapter for a quick overview of the most important ones.
 
 You can continue from the sections below: Basic concepts to know more about the command-line tool, spiders, selectors, the built-in services, the solving specific problems, the extending Scrapy and other things the tutorial hasn’t covered like modeling the scraped data.
 
 Before that, we have another example project for you below.
 
-##### **Example project: QuoteBot**
+##### **2. Example project: QuoteBot**
 This is a Scrapy project to scrape quotes from famous people from http://quotes.toscrape.com ([github repo](https://github.com/scrapinghub/spidyquotes)).
 
 ###### **Extracted data**
@@ -591,8 +621,11 @@ $ scrapy crawl toscrape-css -o quotes.json
 ```
 
 
+##### **3. To know more about Scrapy**
+This section shows the links to have more informations about the basic concepts, built-in services, solving specific problems and extending Scrapy.
 
-#### **1. Basic concepts**
+###### **Basic concepts**
+Here, we present some basic concepts of Scrapy following by a brief description. We can clic on the link of each concept for more details.
 
 | Concept                                                                     | Description                                                                                                                                 |
 |-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
@@ -611,7 +644,8 @@ $ scrapy crawl toscrape-css -o quotes.json
 
 
 
-#### **2. Built-in services**
+###### **Built-in services**
+Here are some built-in services of Scrapy.
 
 | Built-in                                                                    | Description                                                                                                                                 |
 |-----------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------|
@@ -621,7 +655,8 @@ $ scrapy crawl toscrape-css -o quotes.json
 | [STelnet Console](https://docs.scrapy.org/en/latest/topics/telnetconsole.html)            | Inspect a running crawler using a built-in Python console.                                                                                                     |
 
 
-#### **3. Solving specific problems**
+###### **Solving specific problems**
+Some way to solve specific problems we can encounter.
 
 | Solving way                                                                  | Description                                                                                |
 |------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------|
@@ -643,7 +678,8 @@ $ scrapy crawl toscrape-css -o quotes.json
 
 
 
-#### **4. Extending Scrapy**
+###### **Extending Scrapy**
+For more information, we bring in the table below informations about extending Scrapy.
 
 | Extending                                                                | Description                                       |
 |--------------------------------------------------------------------------|---------------------------------------------------|
@@ -658,14 +694,23 @@ $ scrapy crawl toscrape-css -o quotes.json
 | [Core API](https://docs.scrapy.org/en/latest/topics/api.html) | Use it on extensions and middlewares to extend Scrapy functionality.     |
 
 
-#### **Conclusion**
-It is highly recommended to improve your skills by browsing the links below to go further and contribute to the development of Scrapy.
+##### **Conclusion**
+We have just scratched the surface of Scrapy’s potential as a web scraping tool. It is highly recommended to improve your skills by browsing the links below to go further and contribute to the development of Scrapy.
 
 | All the rest                                                                                 | Description                                       |
 |----------------------------------------------------------------------------------------------|---------------------------------------------------|
 | [Release notes](https://docs.scrapy.org/en/latest/news.html)          | See what has changed in recent Scrapy versions.               |
 | [Contributing to Scrapy](https://docs.scrapy.org/en/latest/contributing.html) | Learn how to contribute to the Scrapy project. |
 | [Versioning and API stability](https://docs.scrapy.org/en/latest/versioning.html) | Understand Scrapy versioning and API stability. |
+
+
+##### **Ressources consultées
+
+[Scrapy official site](https://scrapy.org/)
+[ScrapyOps](https://scrapeops.io/python-scrapy-playbook/scrapy-web-scraping-intro/)
+[Scrapy for Automated Web Crawling & Data Extraction in Python (Updated 2023)](https://www.analyticsvidhya.com/blog/2017/07/web-scraping-in-python-using-scrapy/)
+
+
 
 
 
